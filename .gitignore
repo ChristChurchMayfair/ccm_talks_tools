@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -102,3 +103,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+*.mp3
+*.png
+*.jpg
+.awscreds.yml
+.graphcoolcreds.yml
