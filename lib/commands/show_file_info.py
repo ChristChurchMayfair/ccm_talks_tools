@@ -9,9 +9,6 @@ def show_file_info(filename):
     print(filename)
     print()
 
-    from mutagen.easyid3 import EasyID3
-    print(EasyID3.valid_keys.keys())
-
     file_data = mutagen.File(filename)
 
     print("Technical Data")
@@ -33,7 +30,7 @@ def show_file_info(filename):
         if non_printable_tag in list(id3_data.keys()):
             print("{}: NOT PRINTABLE".format(non_printable_tag))
 
-    sermon = Sermon(filename)
+    sermon = Sermon.fromFile(filename)
     print()
     print("Sermon Mapping")
     print("--------------")

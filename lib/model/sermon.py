@@ -18,7 +18,6 @@ class Sermon:
     duration_in_seconds = 0;
 
     def __init__(self, data):
-
         self.duration_in_seconds = data['duration_in_seconds']
         self.id = data['id']
         self.name = data['name']
@@ -48,6 +47,7 @@ class Sermon:
         data['speaker_ids'] = None
         data['series_id'] = None
         data['public_url'] = None
+        data['id'] = None
 
         data['local_audio_file_path'] = filename
         data['file_name'] = os.path.basename(data['local_audio_file_path'])
