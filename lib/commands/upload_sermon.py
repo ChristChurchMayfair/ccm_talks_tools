@@ -22,7 +22,7 @@ from lib.model.sermon import Sermon
 @click.option('--graphcoolcredsfile', default=".graphcoolcreds.yml", help='A file containing AWS credentials.')
 @click.option('--graphcoolserviceid', default="cjkqvvoxy2pyy0175cdmdy1mz", help='A file containing AWS credentials.')
 def upload_sermon(filename, bucket, awscredsfile, graphcoolcredsfile, graphcoolserviceid, prefix):
-    sermon = Sermon(filename)
+    sermon = Sermon.fromFile(filename)
 
     s3_url = upload_to_s3(sermon.local_audio_file_path, bucket, awscredsfile, prefix)
 
@@ -76,7 +76,7 @@ def upload_to_graphcool(sermon, graphcoolcredsfile, graphcoolServiceID, s3_url):
 
     client = GraphQLClient('https://api.graph.cool/simple/v1/{}'.format(graphcoolServiceID))
 
-    client.inject_token(graphcool_creds['graphcooltoken'])
+    client.inject_token("Bearer " + graphcool_creds['graphcooltoken'])
 
     # Look up the sermon by it's URL (which is unique in graphcool)
     result = client.execute(find_sermon_by_url(), {"url": sermon.public_url})
@@ -91,14 +91,6 @@ def upload_to_graphcool(sermon, graphcoolcredsfile, graphcoolServiceID, s3_url):
         exit(1)
     if parsed_json['data']['Sermon'] == None:
         print("Need to upload the data to graphcool")
-
-        click.echo("Please enter the passages for this talk...")
-        click.echo("Use the OSIS format: Book.Chapter.Verse - e.g. John.3.16")
-        click.echo("Ranges are specified with a minus/hyphen: e.g. Rev.21.1-10")
-        click.echo("Multiple passages can be comma separated. e.g. 2Tim.1.1-3,7-9")
-        passage = click.prompt("What is the passage?")
-
-        sermon.passage = passage
 
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(sermon.as_dict())
