@@ -3,6 +3,8 @@ Tools for managing CCM sermons
 
 To use this:
 
+(NB this package uses Python3. Depending on you system you may need to use python3 and pip3 instead of python and pip respectively)
+
 Instal virtualenv tool: `pip install virtualenv`
 
 Create a virtualenv: `virtualenv venv`
