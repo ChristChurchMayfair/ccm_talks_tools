@@ -13,6 +13,17 @@ class Series:
         self.sermons = data['sermons']
 
     @classmethod
+    def fromBasic(cls,name,subtitle):
+        data = {
+            'name': name,
+            'subtitle': subtitle,
+            'id': None,
+            'image3x2Url': None,
+            'sermons': []
+        }
+        return cls(data)
+
+    @classmethod
     def fromGraphCoolData(cls, graphcoolSeries):
         data = {
             'name': graphcoolSeries['name'],
@@ -22,6 +33,13 @@ class Series:
             "sermons" : graphcoolSeries['sermons']
         }
         return cls(data)
+
+    def asDict(self):
+        return {
+            "name": self.name,
+            "subtitle": self.subtitle,
+            "image3x3UrL": self.image3x2url
+        }
 
     def one_line(self):
         return "{:<50} {:<40} {:>5} sermon(s)   {:<15}".format(self.name, self.subtitle, len(self.sermons), self.id)

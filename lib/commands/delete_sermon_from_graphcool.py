@@ -1,8 +1,8 @@
 import json
 
+import graphqlclient as GraphQLClient
 import click
 import yaml
-from graphqlclient import GraphQLClient
 
 from lib.graphql_queries import find_sermons_with_url_ending, delete_sermon
 
@@ -12,7 +12,7 @@ from lib.graphql_queries import find_sermons_with_url_ending, delete_sermon
 @click.option('--prefix', default="talks", help='The name of the S3 bucket to upload to.')
 @click.option('--graphcoolcredsfile', default=".graphcoolcreds.yml", help='A file containing AWS credentials.')
 @click.option('--graphcoolserviceid', default="cjkqvvoxy2pyy0175cdmdy1mz", help='A file containing AWS credentials.')
-def delete_from_graphcool(filename, graphcoolcredsfile, graphcoolserviceid, prefix):
+def delete_sermon_from_graphcool(filename, graphcoolcredsfile, graphcoolserviceid, prefix):
     graphcool_creds = yaml.load(open(graphcoolcredsfile))
 
     client = GraphQLClient('https://api.graph.cool/simple/v1/{}'.format(graphcoolserviceid))

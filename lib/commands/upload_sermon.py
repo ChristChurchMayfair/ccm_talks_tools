@@ -22,6 +22,7 @@ from lib.model.sermon import Sermon
 @click.option('--graphcoolcredsfile', default=".graphcoolcreds.yml", help='A file containing AWS credentials.')
 @click.option('--graphcoolserviceid', default="cjkqvvoxy2pyy0175cdmdy1mz", help='A file containing AWS credentials.')
 def upload_sermon(filename, bucket, awscredsfile, graphcoolcredsfile, graphcoolserviceid, prefix):
+
     sermon = Sermon.fromFile(filename)
 
     s3_url = upload_to_s3(sermon.local_audio_file_path, bucket, awscredsfile, prefix)

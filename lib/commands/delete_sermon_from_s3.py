@@ -9,7 +9,7 @@ from lib.aws_creds import get_aws_credentials
 @click.option('--bucket', default="media.christchurchmayfair.org", help='The name of the S3 bucket to upload to.')
 @click.option('--prefix', default="talks", help='The name of the S3 bucket to upload to.')
 @click.option('--awscredsfile', default=".awscreds.yml", help='A file containing AWS credentials.')
-def delete_from_s3(filename, awscredsfile, bucket, prefix):
+def delete_sermon_from_s3(filename, awscredsfile, bucket, prefix):
     aws_creds = get_aws_credentials(awscredsfile)
 
     s3 = boto3.client('s3',

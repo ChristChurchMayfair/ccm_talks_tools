@@ -15,6 +15,35 @@ def find_sermon_by_url():
     }
     '''
 
+def find_series_by_name():
+    return '''
+    query ($name:String!) {
+        Sermon(name: $name) {
+            name,
+            subtitle
+            id,
+            image3x2Url
+        }
+    }
+    '''
+
+def create_series_query():
+    return '''
+    mutation(
+  $name: String!,
+  $subtitle:String!,
+  $image3x2Url:String
+) {
+    createSeries (
+      name: $name,
+      subtitle: $subtitle,
+      image3x2Url: $image3x2Url
+    ) {
+      id
+    }
+}
+    '''
+
 def list_sermons():
     return '''
     query($number:Int!) {
