@@ -18,12 +18,38 @@ def find_sermon_by_url():
 def find_series_by_name():
     return '''
     query ($name:String!) {
-        Sermon(name: $name) {
+        Series(name: $name) {
             name,
             subtitle
             id,
             image3x2Url
         }
+    }
+    '''
+
+def find_series_by_id():
+    return '''
+    query ($id:ID!) {
+        Series(id: $id) {
+            name,
+            subtitle
+            id,
+            image3x2Url
+            sermons {
+                id
+            }
+        }
+    }
+    '''
+
+def delete_series_by_id():
+    return '''
+    mutation(
+      $id: ID!,
+    ) {
+        deleteSeries(id: $id){
+        name
+      }
     }
     '''
 
