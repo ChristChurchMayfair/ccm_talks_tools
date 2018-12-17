@@ -38,7 +38,7 @@ class Series:
         return {
             "name": self.name,
             "subtitle": self.subtitle,
-            "image3x3UrL": self.image3x2url
+            "image3x2Url": self.image3x2url
         }
 
     def one_line(self):
